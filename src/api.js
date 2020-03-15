@@ -68,13 +68,13 @@ if (typeof require !== 'undefined' && module.exports) {
     };
 
     jsdap.ddsRequestHandler = function(xhr) {
-        const dds = xhr.responseText;
+        var dds = xhr.responseText;
 
         return new parser.ddsParser(dds).parse();
     };
 
-    jsdap.dasRequestHandler = function(xhr, dds = { type: 'Dataset', attributes: {} }) {
-        const das = xhr.responseText;
+    jsdap.dasRequestHandler = function(xhr, dds) {
+        var das = xhr.responseText;
 
         return new parser.dasParser(das, dds).parse();
     };
