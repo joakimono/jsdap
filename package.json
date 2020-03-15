@@ -1,13 +1,13 @@
 {
-    "name": "jsdap",
+    "name": "@jeremybarbet/jsdap",
     "version": "10.0.0",
     "description": "A JavaScript OPeNDAP client",
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com:stcorp/jsdap.git"
+        "url": "https://github.com/jeremybarbet/jsdap"
     },
     "license": "MIT",
-    "homepage": "https://bitbucket.org/jetfuse/jsdap",
+    "homepage": "https://github.com/jeremybarbet/jsdap",
     "main": "src/api.js",
     "scripts": {
         "build": "npm run beautify && npm run minify && cp jsdap-$npm_package_version.js examples/js/jsdap.js",
