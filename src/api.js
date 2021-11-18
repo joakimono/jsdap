@@ -13,10 +13,13 @@ if (typeof require !== 'undefined' && module.exports) {
 (function() {
     'use strict';
 
-    jsdap.newRequest = function(url, binary) {
+    jsdap.newRequest = function(url, binary, credentials) {
         var xhr = new XMLHttpRequest();
 
         xhr.open('GET', url, true);
+        if (credentials) {
+            xhr.withCredentials = true;
+        }
 
         if (binary) {
             xhr.responseType = 'arraybuffer';
@@ -80,7 +83,7 @@ if (typeof require !== 'undefined' && module.exports) {
     };
 
     jsdap.loadDataAndDDS = function(url, onLoad, onError, onAbort, onProgress, onTimeout) {
-        var dodsReq = jsdap.newRequest(url, true);
+        var dodsReq = jsdap.newRequest(url, true, true);
 
         dodsReq.onload = function() {
             onLoad(jsdap.dodsRequestHandler(dodsReq));
@@ -94,9 +97,9 @@ if (typeof require !== 'undefined' && module.exports) {
     };
 
     jsdap.loadDDS = function(url, onLoad, onError, onAbort, onProgress, onTimeout) {
-        var ddsReq = jsdap.newRequest(url);
+        var ddsReq = jsdap.newRequest(url, false, true);
 
-        ddsReq.onLoad = function() {
+        ddsReq.onload = function() {
             onLoad(jsdap.ddsRequestHandler(ddsReq));
         };
         ddsReq.onerror = onError;
@@ -108,7 +111,7 @@ if (typeof require !== 'undefined' && module.exports) {
     };
 
     jsdap.loadDAS = function(url, dds, onLoad, onError, onAbort, onProgress, onTimeout) {
-        var dasReq = jsdap.newRequest(url);
+        var dasReq = jsdap.newRequest(url, false, true);
 
         dasReq.onload = function() {
             onLoad(jsdap.dasRequestHandler(dasReq, dds));
